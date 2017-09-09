@@ -1,0 +1,137 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			API 对接测试系统
+		</title>
+		<meta name="description" content="Source code generated using layoutit.com">
+		<meta name="author" content="LayoutIt!">
+		<link href="/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/css/style.css" rel="stylesheet">
+		<script>
+			function deleteRecord(rid) {
+				window.location.href='delete?id='+rid;
+            }
+            function toAdd(){
+                window.location.href='toAdd';
+            }
+            function toSearch() {
+				$("#searchForm").submit();
+            }
+            function show(id) {
+				alert($("#"+id).val());
+            }
+		</script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<h3>
+						<a href="/">API 对接测试系统</a>
+					</h3>
+				</div>
+			</div>
+			<div class="row">
+				<form role="form" action="search" method="post" id="searchForm">
+					<div class="col-md-5">
+						<div class="form-group">
+							<label for="byName">
+								根据 Name
+							</label>
+							<input type="email" class="form-control" name="byName" id="byName">
+						</div>
+					</div>
+					<div class="col-md-5">
+						<div class="form-group">
+							<label for="byParam">
+								根据 url.param
+							</label>
+							<input type="email" class="form-control" name="byParam" id="byParam">
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="row">
+							<div class="col-md-6">
+								<label>
+									search
+								</label>
+								<button type="button" class="btn btn-block btn-success" onclick="toSearch()">
+									搜索
+								</button>
+							</div>
+							<div class="col-md-6">
+								<label>
+									add
+								</label>
+								<button type="button" class="btn btn-block btn-warning" onclick="toAdd()">
+									新增
+								</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>
+									#
+								</th>
+								<th>
+									Name
+								</th>
+								<th>
+									Request
+								</th>
+								<th>
+									Response
+								</th>
+								<th>
+									AddTime
+								</th>
+								<th>
+									Operator
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="record:${rs}">
+								<td th:text="${record.id}">
+									1
+								</td>
+								<td th:text="${record.name}" th:maxlength="15">
+									TB - Monthly
+								</td>
+								<td th:text="${record.request}" th:maxlength="15" >
+									01/04/2012
+								</td>
+								<td th:text="${record.resp}" th:maxlength="15" >
+									Default
+								</td>
+								<td th:text="${record.addTime}">
+									Default
+								</td>
+								<td>
+									<button type="button" class="btn btn-danger" th:onclick="'deleteRecord('+${record.id}+')'">删除</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<script src="/js/jquery.min.js">
+		</script>
+		<script src="/js/bootstrap.min.js">
+		</script>
+		<script src="/js/scripts.js">
+		</script>
+	</body>
+
+</html>

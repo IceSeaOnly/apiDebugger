@@ -19,4 +19,9 @@ public class HttpRequestUtils {
     public static String getRequestFullPath(HttpServletRequest request){
         return request.getRequestURL()+"?" + request.getQueryString();
     }
+
+    public static String getRequestPath(HttpServletRequest request) {
+        String full = getRequestFullPath(request);
+        return full.substring(full.lastIndexOf("/"),full.length());
+    }
 }

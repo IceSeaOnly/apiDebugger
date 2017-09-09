@@ -1,6 +1,7 @@
 package site.binghai.entity;
 
 import site.binghai.utils.MD5;
+import site.binghai.utils.TimeFormatter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,17 +17,25 @@ public class RespEntity {
     @Id
     @GeneratedValue
     private int id;
+    private String name;
     private String hash;
     private String request;
     private String resp;
+    private String addTime;
 
-    public RespEntity(String request, String resp) {
+    public RespEntity(String name,String request, String resp) {
+        this.name = name;
         this.hash = MD5.encryption(request);
         this.request = request;
         this.resp = resp;
+        this.addTime = TimeFormatter.format(System.currentTimeMillis());
     }
 
     public RespEntity() {
+    }
+
+    public void dealRequest(){
+        setRequest(getRequest().substring(getRequest().lastIndexOf("/"),getRequest().length()));
     }
 
     public int getId() {
@@ -51,6 +60,8 @@ public class RespEntity {
 
     public void setRequest(String request) {
         this.request = request;
+        this.hash = MD5.encryption(request);
+        this.addTime = TimeFormatter.format(System.currentTimeMillis());
     }
 
     public String getResp() {
@@ -59,5 +70,21 @@ public class RespEntity {
 
     public void setResp(String resp) {
         this.resp = resp;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
     }
 }
