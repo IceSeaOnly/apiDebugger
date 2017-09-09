@@ -15,6 +15,9 @@
 			function deleteRecord(rid) {
 				window.location.href='delete?id='+rid;
             }
+            function edit(rid) {
+				window.location.href='edit?id='+rid;
+            }
             function toAdd(){
                 window.location.href='toAdd';
             }
@@ -80,44 +83,45 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th>
+								<th >
 									#
 								</th>
-								<th>
+								<th >
 									Name
 								</th>
-								<th>
+								<th >
 									Request
 								</th>
-								<th>
+								<th >
 									Response
 								</th>
-								<th>
+								<th >
 									AddTime
 								</th>
-								<th>
+								<th >
 									Operator
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="record:${rs}">
-								<td th:text="${record.id}">
+								<td th:text="${record.id}" >
 									1
 								</td>
-								<td th:text="${record.name}" th:maxlength="15">
+								<td th:text="${record.name}">
 									TB - Monthly
 								</td>
-								<td th:text="${record.request}" th:maxlength="15" >
+								<td th:text="${record.request}" >
 									01/04/2012
 								</td>
-								<td th:text="${record.resp}" th:maxlength="15" >
+								<td th:text="${record.resp}">
 									Default
 								</td>
 								<td th:text="${record.addTime}">
 									Default
 								</td>
-								<td>
+								<td >
+									<button type="button" class="btn btn-success" th:onclick="'edit('+${record.id}+')'">更新</button>
 									<button type="button" class="btn btn-danger" th:onclick="'deleteRecord('+${record.id}+')'">删除</button>
 								</td>
 							</tr>

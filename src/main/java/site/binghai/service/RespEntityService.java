@@ -45,4 +45,8 @@ public class RespEntityService {
     public List<RespEntity> findByHash(String hash) {
         return respEntityDao.findByHash(hash);
     }
+
+    public Object findById(int id) {
+        return respEntityDao.findOne(id);
+    }
 }

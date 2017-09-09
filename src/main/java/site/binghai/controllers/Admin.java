@@ -6,7 +6,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import site.binghai.entity.RespEntity;
 import site.binghai.service.RespEntityService;
 import site.binghai.utils.MD5;
@@ -25,8 +24,14 @@ public class Admin {
 
     @RequestMapping("/")
     public String index(ModelMap map){
-        map.put("rs",service.listAll());
+        map.put("rs",sorter(service.listAll()));
         return "index";
+    }
+
+    private List<RespEntity> sorter(List<RespEntity> ls) {
+        ls.forEach(v -> v.setRequest(v.getRequest().length() > 30 ? v.getRequest().substring(0,30) : v.getRequest()));
+        ls.forEach(v -> v.setResp(v.getResp().length() > 30 ? v.getResp().substring(0,30) : v.getResp()));
+        return ls;
     }
 
     @RequestMapping("toAdd")
@@ -57,5 +62,11 @@ public class Admin {
         }
         map.put("rs",rs);
         return "index";
+    }
+
+    @RequestMapping("edit")
+    public String edit(int id,ModelMap map){
+        map.put("val",service.findById(id));
+        return "edit";
     }
 }

@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			API 对接测试系统 [冰海软件]
+		</title>
+		<meta name="description" content="Source code generated using layoutit.com">
+		<meta name="author" content="LayoutIt!">
+		<link href="/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/css/style.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<h3>
+						<a href="/">API 对接测试系统  [冰海软件]</a>:编辑
+					</h3>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<form role="form" method="post" action="addRecord">
+						<div class="form-group">
+
+							<label for="exampleInputEmail0">
+								Name
+							</label>
+							<input type="text" name="name" class="form-control" id="exampleInputEmail0" th:value="${val.name}"/>
+						</div>
+						<div class="form-group">
+
+							<label for="exampleInputEmail1">
+								Request
+							</label>
+							<input type="text" name="request" class="form-control" id="exampleInputEmail1" th:value="${val.request}" readonly="true"/>
+						</div>
+						<div class="form-group">
+
+							<label for="exampleInputPassword1">
+								Response
+							</label>
+							<input type="text" name="resp" class="form-control" id="exampleInputPassword1" th:value="${val.resp}"/>
+						</div>
+						<button type="submit" class="btn btn-default">
+							更新
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script src="/js/jquery.min.js">
+		</script>
+		<script src="/js/bootstrap.min.js">
+		</script>
+		<script src="/js/scripts.js">
+		</script>
+	</body>
+
+</html>
