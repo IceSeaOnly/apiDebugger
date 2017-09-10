@@ -61,10 +61,10 @@ public class RespEntity {
     public void setRequest(String request) {
         this.request = request;
         this.hash = MD5.encryption(request);
-        this.addTime = TimeFormatter.format(System.currentTimeMillis());
     }
 
     public String getResp() {
+        this.addTime = TimeFormatter.format(System.currentTimeMillis());
         return resp;
     }
 
