@@ -64,7 +64,6 @@ public class RespEntity {
     }
 
     public String getResp() {
-        this.addTime = TimeFormatter.format(System.currentTimeMillis());
         return resp;
     }
 
@@ -77,6 +76,7 @@ public class RespEntity {
     }
 
     public void setName(String name) {
+        this.addTime = TimeFormatter.format(System.currentTimeMillis());
         this.name = name;
     }
 
