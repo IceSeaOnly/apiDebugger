@@ -33,7 +33,7 @@ public class Api {
             url = url.substring(0, url.indexOf("&callback=jQuery"));
             log("jQuery timeStamp found,cut out:" + url);
         }
-        List<RespEntity> rs = service.findByHash(MD5.encryption(HttpRequestUtils.getRequestPath(request)));
+        List<RespEntity> rs = service.findByHash(MD5.encryption(url));
         log("Answer : " + (!CollectionUtils.isEmpty(rs) ? rs.get(0).getResp() : "No suitable answer."));
         return !CollectionUtils.isEmpty(rs) ? rs.get(0).getResp() : "No suitable answer.";
     }
