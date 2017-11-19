@@ -27,7 +27,12 @@ public class Api {
 
     @RequestMapping("api")
     public Object api(HttpServletRequest request) {
-        log("Full Url : " + HttpRequestUtils.getRequestFullPath(request));
+        String url = HttpRequestUtils.getRequestFullPath(request);
+        log("Full Url : " + url);
+        if (url.contains("&callback=jQuery")) {
+            url = url.substring(0, url.indexOf("&callback=jQuery"));
+            log("jQuery timeStamp found,cut out:" + url);
+        }
         List<RespEntity> rs = service.findByHash(MD5.encryption(HttpRequestUtils.getRequestPath(request)));
         log("Answer : " + (!CollectionUtils.isEmpty(rs) ? rs.get(0).getResp() : "No suitable answer."));
         return !CollectionUtils.isEmpty(rs) ? rs.get(0).getResp() : "No suitable answer.";
