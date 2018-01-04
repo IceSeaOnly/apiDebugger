@@ -23,50 +23,51 @@ public class Admin {
     private RespEntityService service;
 
     @RequestMapping("/")
-    public String index(ModelMap map){
-        map.put("rs",sorter(service.listAll()));
+    public String index(ModelMap map) {
+        map.put("rs", sorter(service.listAll()));
         return "index";
     }
 
     private List<RespEntity> sorter(List<RespEntity> ls) {
-        ls.forEach(v -> v.setRequest(v.getRequest().length() > 30 ? v.getRequest().substring(0,30) : v.getRequest()));
-        ls.forEach(v -> v.setResp(v.getResp().length() > 30 ? v.getResp().substring(0,30) : v.getResp()));
+        ls.forEach(v -> v.setRequest(v.getRequest().length() > 30 ? v.getRequest().substring(0, 30) : v.getRequest()));
+        ls.forEach(v -> v.setResp(v.getResp().length() > 30 ? v.getResp().substring(0, 30) : v.getResp()));
         return ls;
     }
 
     @RequestMapping("toAdd")
-    public String toAdd(){
+    public String toAdd(ModelMap map) {
+        map.put("defaultUrl", "/api?act=" + MD5.encryption(System.currentTimeMillis() + "hello"));
         return "add";
     }
 
-    @RequestMapping(value = "addRecord",method = RequestMethod.POST)
-    public String addRecord(RespEntity entity){
+    @RequestMapping(value = "addRecord", method = RequestMethod.POST)
+    public String addRecord(RespEntity entity) {
         entity.dealRequest();
         service.addOne(entity);
         return "redirect:/";
     }
 
     @RequestMapping("delete")
-    public String delete(int id){
+    public String delete(int id) {
         service.delete(id);
         return "redirect:/";
     }
 
-    @RequestMapping(value = "search",method = RequestMethod.POST)
-    public String delete(String byName,String byParam,ModelMap map){
+    @RequestMapping(value = "search", method = RequestMethod.POST)
+    public String delete(String byName, String byParam, ModelMap map) {
         List<RespEntity> rs = null;
-        if(!StringUtils.isEmpty(byName)){
+        if (!StringUtils.isEmpty(byName)) {
             rs = service.findByName(byName);
-        }else{
+        } else {
             rs = service.findByHash(MD5.encryption(byParam));
         }
-        map.put("rs",rs);
+        map.put("rs", rs);
         return "index";
     }
 
     @RequestMapping("edit")
-    public String edit(int id,ModelMap map){
-        map.put("val",service.findById(id));
+    public String edit(int id, ModelMap map) {
+        map.put("val", service.findById(id));
         return "edit";
     }
 }
