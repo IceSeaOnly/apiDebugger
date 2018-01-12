@@ -19,6 +19,7 @@ public class RespEntity {
     private int id;
     private String name;
     private String hash;
+    private String passCode;
     private String request;
     private String resp;
     private String addTime;
@@ -86,5 +87,13 @@ public class RespEntity {
 
     public void setAddTime(String addTime) {
         this.addTime = addTime;
+    }
+
+    public String getPassCode() {
+        return passCode;
+    }
+
+    public void setPassCode(String passCode) {
+        this.passCode = passCode;
     }
 }

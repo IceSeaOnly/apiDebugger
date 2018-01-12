@@ -34,6 +34,13 @@
 						</div>
 						<div class="form-group">
 
+							<label for="exampleInputEmail0">
+								passCode
+							</label>
+							<input type="password" name="passCode" class="form-control" id="passCode" placeholder="need passCode if this is private"/>
+						</div>
+						<div class="form-group">
+
 							<label for="exampleInputEmail1">
 								Request
 							</label>
@@ -45,7 +52,7 @@
 								Response
 							</label>
 							<textarea name="resp" style="width:100%" rows="10" th:text="${val.resp}"></textarea>
-							<!--<input type="text" name="resp" class="form-control" id="exampleInputPassword1" th:value="${val.resp}"/>-->
+							<input type="hidden" name="id" class="form-control" th:value="${val.id}"/>
 						</div>
 						<button type="submit" class="btn btn-default">
 							更新

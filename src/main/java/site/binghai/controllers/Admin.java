@@ -49,7 +49,10 @@ public class Admin {
 
     @RequestMapping("delete")
     public String delete(int id) {
-        service.delete(id);
+        RespEntity entity = service.findById(id);
+        if (entity != null && StringUtils.isEmpty(entity.getPassCode())) {
+            service.delete(id);
+        }
         return "redirect:/";
     }
 

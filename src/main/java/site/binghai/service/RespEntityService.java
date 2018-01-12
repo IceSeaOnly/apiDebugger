@@ -21,18 +21,22 @@ public class RespEntityService {
 
 
     public List<RespEntity> listAll() {
-        List<RespEntity> rs= respEntityDao.findAll();
-        rs.sort((a,b) -> b.getId()-a.getId());
+        List<RespEntity> rs = respEntityDao.findAll();
+        rs.sort((a, b) -> b.getId() - a.getId());
         return rs;
     }
 
     @Transactional
     public void addOne(RespEntity entity) {
-        List<RespEntity> rs = respEntityDao.findByHash(entity.getHash());
-        if(!CollectionUtils.isEmpty(rs)){
-            rs.stream().forEach(v -> respEntityDao.delete(v.getId()));
+        RespEntity result = respEntityDao.findOne(entity.getId());
+        if (result != null) {
+            if (result.getPassCode().equals(entity.getPassCode())) {
+                respEntityDao.delete(entity.getId());
+                respEntityDao.save(entity);
+            }
+        } else {
+            respEntityDao.save(entity);
         }
-        respEntityDao.save(entity);
     }
 
     @Transactional
@@ -48,7 +52,7 @@ public class RespEntityService {
         return respEntityDao.findByHash(hash);
     }
 
-    public Object findById(int id) {
+    public RespEntity findById(int id) {
         return respEntityDao.findOne(id);
     }
 }
