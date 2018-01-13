@@ -93,6 +93,9 @@
                         Request
                     </th>
                     <th>
+                        preview
+                    </th>
+                    <th>
                         Response
                     </th>
                     <th>
@@ -111,11 +114,13 @@
                     <td th:text="${record.name}">
                         TB - Monthly
                     </td>
-                    <a th:href="'http://wx.nanayun.cn'+${record.request}">
-                        <td th:text="${record.request}">
-                            01/04/2012
-                        </td>
-                    </a>
+                    <td th:text="${record.request}">
+                        01/04/2012
+                    </td>
+                    <td>
+                        <a th:href="'http://wx.nanayun.cn'+${record.request}" target="_blank">Go</a>
+                    </td>
+
                     <td th:text="${record.resp}">
                         Default
                     </td>
@@ -124,7 +129,7 @@
                     </td>
                     <td>
                         <button type="button" class="btn btn-success" th:onclick="'edit('+${record.id}+')'">更新</button>
-                        <button th:type="${record.passCode == '' ? 'button':'disable'}" class="btn btn-danger"
+                        <button th:type="${record.emptyCode() ? 'button':'disable'}" class="btn btn-danger"
                                 th:onclick="'deleteRecord('+${record.id}+')'">删除
                         </button>
                     </td>

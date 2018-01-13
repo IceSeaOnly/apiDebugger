@@ -24,7 +24,7 @@ public class RespEntity {
     private String resp;
     private String addTime;
 
-    public RespEntity(String name,String request, String resp) {
+    public RespEntity(String name, String request, String resp) {
         this.name = name;
         this.hash = MD5.encryption(request);
         this.request = request;
@@ -35,8 +35,8 @@ public class RespEntity {
     public RespEntity() {
     }
 
-    public void dealRequest(){
-        setRequest(getRequest().substring(getRequest().lastIndexOf("/"),getRequest().length()));
+    public void dealRequest() {
+        setRequest(getRequest().substring(getRequest().lastIndexOf("/"), getRequest().length()));
     }
 
     public int getId() {
@@ -95,5 +95,9 @@ public class RespEntity {
 
     public void setPassCode(String passCode) {
         this.passCode = passCode;
+    }
+
+    public boolean emptyCode() {
+        return passCode == null || passCode.equals("");
     }
 }
