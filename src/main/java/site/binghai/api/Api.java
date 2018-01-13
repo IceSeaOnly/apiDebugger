@@ -32,13 +32,19 @@ public class Api {
         String url = HttpRequestUtils.getRequestFullPath(request);
         log("Full Url : " + url);
         url = url.substring(url.lastIndexOf("/"), url.length());
+        String callback = null;
         if (url.contains("&callback=jQuery")) {
+            callback = HttpRequestUtils.getParams(request).get("callback");
             url = url.substring(0, url.indexOf("&callback=jQuery"));
             log("jQuery timeStamp found,cut out:" + url);
         }
         List<RespEntity> rs = service.findByHash(MD5.encryption(url));
         log("Answer for " + url + ": " + (!CollectionUtils.isEmpty(rs) ? rs.get(0).getResp() : "No suitable answer."));
-        return !CollectionUtils.isEmpty(rs) ? rs.get(0).getResp() : "No suitable answer.";
+        if (CollectionUtils.isEmpty(rs)) {
+            return callback == null ? rs.get(0).getResp() : String.format("%s(%s)", callback, rs.get(0).getResp());
+        } else {
+            return "No suitable answer.";
+        }
     }
 
 }
