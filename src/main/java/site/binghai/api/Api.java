@@ -40,7 +40,7 @@ public class Api {
         }
         List<RespEntity> rs = service.findByHash(MD5.encryption(url));
         log("Answer for " + url + ": " + (!CollectionUtils.isEmpty(rs) ? rs.get(0).getResp() : "No suitable answer."));
-        if (CollectionUtils.isEmpty(rs)) {
+        if (!CollectionUtils.isEmpty(rs)) {
             return callback == null ? rs.get(0).getResp() : String.format("%s(%s)", callback, rs.get(0).getResp());
         } else {
             return "No suitable answer.";
