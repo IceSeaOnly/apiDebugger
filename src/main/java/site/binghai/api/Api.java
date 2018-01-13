@@ -2,6 +2,7 @@ package site.binghai.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import site.binghai.entity.RespEntity;
@@ -26,6 +27,7 @@ public class Api {
     RespEntityService service;
 
     @RequestMapping("api")
+    @CrossOrigin(origins = "*")
     public Object api(HttpServletRequest request) {
         String url = HttpRequestUtils.getRequestFullPath(request);
         log("Full Url : " + url);
