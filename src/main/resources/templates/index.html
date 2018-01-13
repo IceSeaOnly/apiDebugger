@@ -124,7 +124,8 @@
                     </td>
                     <td>
                         <button type="button" class="btn btn-success" th:onclick="'edit('+${record.id}+')'">更新</button>
-                        <button th:text="${record.passCode == ''}" type="button" class="btn btn-danger" th:onclick="'deleteRecord('+${record.id}+')'">删除
+                        <button th:type="${record.passCode == '' ? 'button':'disable'}" class="btn btn-danger"
+                                th:onclick="'deleteRecord('+${record.id}+')'">删除
                         </button>
                     </td>
                 </tr>
