@@ -83,25 +83,25 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>
+                    <th width="5%">
                         #
                     </th>
-                    <th>
+                    <th width="10%">
                         Name
                     </th>
-                    <th>
+                    <th width="20%">
                         Request
                     </th>
-                    <th>
+                    <th width="5%">
                         preview
                     </th>
-                    <th>
+                    <th width="30%">
                         Response
                     </th>
-                    <th>
+                    <th width="10%">
                         AddTime
                     </th>
-                    <th>
+                    <th width="20%">
                         Operator
                     </th>
                 </tr>
@@ -118,7 +118,7 @@
                         01/04/2012
                     </td>
                     <td>
-                        <a th:href="'http://wx.nanayun.cn'+${record.request}" target="_blank">Go</a>
+                        <a th:href="'http://wx.nanayun.cn'+${record.request}" target="_blank">Preview</a>
                     </td>
 
                     <td th:text="${record.resp}">
