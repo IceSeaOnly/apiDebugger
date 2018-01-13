@@ -29,6 +29,7 @@ public class Api {
     public Object api(HttpServletRequest request) {
         String url = HttpRequestUtils.getRequestFullPath(request);
         log("Full Url : " + url);
+        url = url.substring(url.indexOf("/"), url.length());
         if (url.contains("&callback=jQuery")) {
             url = url.substring(0, url.indexOf("&callback=jQuery"));
             log("jQuery timeStamp found,cut out:" + url);
