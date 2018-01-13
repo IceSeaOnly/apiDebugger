@@ -129,7 +129,7 @@
                     </td>
                     <td>
                         <button type="button" class="btn btn-success" th:onclick="'edit('+${record.id}+')'">更新</button>
-                        <button th:type="${record.emptyCode() ? 'button':'disable'}" class="btn btn-danger"
+                        <button type="button"  th:if="${!record.emptyCode()}" class="btn btn-danger"
                                 th:onclick="'deleteRecord('+${record.id}+')'">删除
                         </button>
                     </td>

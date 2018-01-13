@@ -29,14 +29,13 @@ public class Admin {
     }
 
     private List<RespEntity> sorter(List<RespEntity> ls) {
-        ls.forEach(v -> v.setRequest(v.getRequest().length() > 30 ? v.getRequest().substring(0, 30) : v.getRequest()));
         ls.forEach(v -> v.setResp(v.getResp().length() > 70 ? v.getResp().substring(0, 70) : v.getResp()));
         return ls;
     }
 
     @RequestMapping("toAdd")
     public String toAdd(ModelMap map) {
-        map.put("defaultUrl", "/api?act=" + MD5.encryption(System.currentTimeMillis() + "hello"));
+        map.put("defaultUrl", "/api?act=" + MD5.encryption(System.currentTimeMillis() + "hello").substring(0,15));
         return "add";
     }
 
