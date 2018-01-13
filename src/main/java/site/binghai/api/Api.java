@@ -34,7 +34,7 @@ public class Api {
             log("jQuery timeStamp found,cut out:" + url);
         }
         List<RespEntity> rs = service.findByHash(MD5.encryption(!url.startsWith("/") ? "/" + url : url));
-        log("Answer : " + (!CollectionUtils.isEmpty(rs) ? rs.get(0).getResp() : "No suitable answer."));
+        log("Answer for " + url + ": " + (!CollectionUtils.isEmpty(rs) ? rs.get(0).getResp() : "No suitable answer."));
         return !CollectionUtils.isEmpty(rs) ? rs.get(0).getResp() : "No suitable answer.";
     }
 
