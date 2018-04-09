@@ -1,10 +1,13 @@
 package site.binghai.api;
 
+import com.alibaba.fastjson.JSONObject;
+import com.qiniu.util.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import site.binghai.entity.AuthParams;
 import site.binghai.entity.RespEntity;
 import site.binghai.service.RespEntityService;
 import site.binghai.utils.HttpRequestUtils;
@@ -24,7 +27,9 @@ import static site.binghai.utils.SimpleLogger.log;
 @RestController
 public class Api {
     @Autowired
-    RespEntityService service;
+    private RespEntityService service;
+    @Autowired
+    private AuthParams authParams;
 
     @RequestMapping("api")
     @CrossOrigin(origins = "*")
@@ -47,4 +52,17 @@ public class Api {
         }
     }
 
+    @RequestMapping("qiniuToken")
+    public Object qiniuToken(){
+        String bucket = authParams.getBucket();
+        Auth auth = Auth.create(authParams.getAk(), authParams.getSk());
+        String upToken = auth.uploadToken(bucket);
+
+        JSONObject obj = new JSONObject();
+        obj.put("data",upToken);
+        obj.put("status","SUCCESS");
+        obj.put("msg","SUCCESS");
+
+        return obj;
+    }
 }
