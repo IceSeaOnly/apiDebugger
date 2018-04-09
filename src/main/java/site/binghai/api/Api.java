@@ -53,6 +53,7 @@ public class Api {
     }
 
     @RequestMapping("qiniuToken")
+    @CrossOrigin(origins = "*")
     public Object qiniuToken(){
         String bucket = authParams.getBucket();
         Auth auth = Auth.create(authParams.getAk(), authParams.getSk());
